@@ -25,7 +25,16 @@ public class Employee {
 		this.name = name;
 		this.salary = salary;
 	}
+	public Employee() {
+		// TODO Auto-generated constructor stub
+	}
 	public void setSalary(float salary) {
 		this.salary = salary;
 	} 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return id+" "+name+" "+salary;
+	} 
+	
 }
