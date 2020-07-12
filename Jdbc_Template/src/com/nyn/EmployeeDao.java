@@ -67,4 +67,10 @@ public class EmployeeDao {
 		});
 	}
 	
+	public int updateEmp(int id , String name) {
+		
+		String sql = "Update employee set name = '"+name+"' where id = '"+id+"'";
+		return jdbcTemplate.update(sql);
+	}
+	
 }
