@@ -15,13 +15,15 @@ public class JdbcMain {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		
 		EmployeeDao dao=(EmployeeDao)context.getBean("edao");  
-		/*
-		 * Scanner s = new Scanner(System.in); int id = s.nextInt(); String name =
-		 * s.next(); float sal = s.nextFloat(); int status=dao.saveEmp(new Employee(id,
-		 * name,sal)); // status =status + dao.saveEmp(new Employee(12, "nayan",32000));
-		 * System.out.println(status);
-		 */
+		
+		  Scanner s = new Scanner(System.in); int id = s.nextInt(); String name =
+		  s.next(); float sal = s.nextFloat(); int status=dao.saveEmp(new Employee(id,
+		  name,sal)); // status =status + dao.saveEmp(new Employee(12, "nayan",32000));
+		  System.out.println(status);
+		 
 	   List<Employee> list = dao.getEmp();
+	   
+	   List<Employee> list1 = dao.getEmpRowMapper();
 	   for(Employee e:list) {
 		   
 		   System.out.println(e);
