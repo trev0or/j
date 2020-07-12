@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.ResultSetExtractor;import org.springframework.jdbc.core.RowMapper;
 
 public class EmployeeDao {
 
@@ -26,7 +26,7 @@ public class EmployeeDao {
 		return jdbcTemplate.update(query);
 		
 	}
-	public List<Employee> getEmp() {
+	public List<Employee> getEmp() { //resultsetextractor
 		
 		return jdbcTemplate.query("select * from employee", new ResultSetExtractor<List<Employee>>() {
 
@@ -38,7 +38,7 @@ public class EmployeeDao {
 					Employee e = new Employee();
 					e.setId(rs.getInt(1));
 					 e.setName(rs.getString(2));  
-				     e.setSalary(rs.getInt(3));  
+					 e.setSalary(rs.getFloat(3)); 
 				     list.add(e);
 					
 				}
@@ -48,6 +48,29 @@ public class EmployeeDao {
 		});
 		
 		
+	}
+	
+	public List<Employee> getEmpRowMapper(){
+		
+		return jdbcTemplate.query("select * from employee", new RowMapper<Employee>() {
+
+			@Override
+			public Employee mapRow(ResultSet rs, int row) throws SQLException {
+				// TODO Auto-generated method stub
+				Employee e =new Employee();
+				e.setId(rs.getInt(1));
+				 e.setName(rs.getString(2));  
+			     e.setSalary(rs.getFloat(3)); 
+						
+				return e;
+			}
+		});
+	}
+	
+	public int updateEmp(int id , String name) {
+		
+		String sql = "Update employee set name = '"+name+"' where id = '"+id+"'";
+		return jdbcTemplate.update(sql);
 	}
 	
 }
